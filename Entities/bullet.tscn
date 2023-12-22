@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bspx508570psu"]
+
+[ext_resource type="Script" path="res://Components/TrailEffect.gd" id="1_2kti6"]
+[ext_resource type="Script" path="res://Entities/bullet.gd" id="1_kqdhn"]
+
+[sub_resource type="Curve" id="Curve_njq1r"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="Bullet" type="Area2D"]
+script = ExtResource("1_kqdhn")
+speed = 8.0
+
+[node name="TrailEffect" type="Node" parent="." node_paths=PackedStringArray("entity")]
+script = ExtResource("1_2kti6")
+entity = NodePath("..")
+scale = 8.0
+segments = 3
+spacing = 2.0
+taper = SubResource("Curve_njq1r")

@@ -1,0 +1,51 @@
+[gd_scene load_steps=6 format=3 uid="uid://ccah3j128wsvl"]
+
+[ext_resource type="Script" path="res://Player/Player.gd" id="1_i4eca"]
+[ext_resource type="Texture2D" uid="uid://ck6pc4kijn686" path="res://Assets/tilemap_packed.png" id="2_glq12"]
+[ext_resource type="Script" path="res://Player/Weapon.gd" id="3_jrrdw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tc8j7"]
+size = Vector2(10, 9)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_2lel2"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("Weapon:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("Weapon/Sprite2D:flip_v")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+
+[node name="Player" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_i4eca")
+speed = 100.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3.5)
+shape = SubResource("RectangleShape2D_tc8j7")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+process_callback = 0
+position_smoothing_enabled = true
+position_smoothing_speed = 8.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_glq12")
+region_enabled = true
+region_rect = Rect2(0, 112, 16, 16)
+
+[node name="Weapon" type="Node2D" parent="." node_paths=PackedStringArray("player")]
+position = Vector2(5, 4)
+script = ExtResource("3_jrrdw")
+player = NodePath("..")
+
+[node name="Sprite2D" type="Sprite2D" parent="Weapon"]
+texture = ExtResource("2_glq12")
+region_enabled = true
+region_rect = Rect2(144, 160, 16, 16)
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_2lel2")
