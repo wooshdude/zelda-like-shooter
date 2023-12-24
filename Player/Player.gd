@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @export var speed: float
 @onready var camera = $Camera2D
+@onready var ui = $UI
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -12,6 +13,7 @@ func _enter_tree():
 
 
 func _ready():
+	ui.visible = is_multiplayer_authority()
 	camera.enabled = is_multiplayer_authority()
 	if not is_multiplayer_authority(): return
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN

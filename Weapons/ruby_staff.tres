@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=6 format=3 uid="uid://bqt3cgsdxxj1i"]
+
+[ext_resource type="Script" path="res://Weapons/weapon.gd" id="1_i8oko"]
+[ext_resource type="Script" path="res://Effects/trail_data.gd" id="1_riv1t"]
+[ext_resource type="Texture2D" uid="uid://byr6kxawcg6je" path="res://Assets/Tiles/tile_0129.png" id="2_abs1i"]
+
+[sub_resource type="Curve" id="Curve_50n36"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Resource" id="Resource_3mk72"]
+script = ExtResource("1_riv1t")
+scale = 12.0
+segments = 3
+spacing = 2.0
+taper = SubResource("Curve_50n36")
+color = Color(0.921569, 0.741176, 0.913725, 1)
+use_outline = true
+outline_width = 6
+outline_color = Color(0.819608, 0.462745, 0.815686, 1)
+
+[resource]
+script = ExtResource("1_i8oko")
+name = "Ruby Staff"
+sprite = ExtResource("2_abs1i")
+damage = 1
+rpm = 120
+speed = 10
+bullet = SubResource("Resource_3mk72")

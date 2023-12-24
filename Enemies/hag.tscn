@@ -1,0 +1,60 @@
+[gd_scene load_steps=9 format=3 uid="uid://csp4rn6xptn46"]
+
+[ext_resource type="Texture2D" uid="uid://3ecj1kqqao1g" path="res://Assets/Tiles/tile_0108.png" id="1_lvr6y"]
+[ext_resource type="Script" path="res://Components/StatesMachine.gd" id="2_ydph6"]
+[ext_resource type="Script" path="res://Enemies/EnemyFollow.gd" id="3_k25ws"]
+[ext_resource type="Script" path="res://Components/hurt_box.gd" id="5_ehbfc"]
+[ext_resource type="Script" path="res://Components/health_component.gd" id="6_uy3tn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d46tn"]
+radius = 128.004
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u0r1f"]
+radius = 6.0
+height = 16.0
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_lv3y2"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("HealthComponent:health")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
+[node name="Hag" type="CharacterBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_lvr6y")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_ydph6")
+initial_state = NodePath("EnemyFollow")
+
+[node name="EnemyFollow" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy", "area")]
+script = ExtResource("3_k25ws")
+enemy = NodePath("../..")
+area = NodePath("../../Area2D")
+move_speed = 80
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_d46tn")
+
+[node name="HurtboxComponent" type="Area2D" parent="." node_paths=PackedStringArray("entity", "health_component") groups=["Enemy"]]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("5_ehbfc")
+entity = NodePath("..")
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("CapsuleShape2D_u0r1f")
+
+[node name="HealthComponent" type="Node" parent="." node_paths=PackedStringArray("entity", "hurt_box")]
+script = ExtResource("6_uy3tn")
+entity = NodePath("..")
+hurt_box = NodePath("../HurtboxComponent")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_lv3y2")

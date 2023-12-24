@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=6 format=3 uid="uid://cik4b30uugmcy"]
+
+[ext_resource type="Script" path="res://Effects/trail_data.gd" id="1_40pft"]
+[ext_resource type="Script" path="res://Weapons/weapon.gd" id="1_gkeyn"]
+[ext_resource type="Texture2D" uid="uid://bgbkg14nua000" path="res://Assets/Tiles/tile_0130.png" id="2_kq6q5"]
+
+[sub_resource type="Curve" id="Curve_ru31e"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.543956, 0.516483), 2.54546, 2.54546, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Resource" id="Resource_e7x58"]
+script = ExtResource("1_40pft")
+scale = 6.0
+segments = 8
+spacing = 0.5
+taper = SubResource("Curve_ru31e")
+color = Color(1, 1, 1, 1)
+use_outline = true
+outline_width = 8
+outline_color = Color(0.458824, 0.890196, 1, 1)
+
+[resource]
+script = ExtResource("1_gkeyn")
+name = "Safire Staff"
+sprite = ExtResource("2_kq6q5")
+damage = 1
+rpm = 180
+speed = 15
+bullet = SubResource("Resource_e7x58")

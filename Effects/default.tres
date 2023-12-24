@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="TrailData" load_steps=3 format=3 uid="uid://btxr53aqw3wqd"]
+
+[ext_resource type="Script" path="res://Effects/trail_data.gd" id="1_jul2k"]
+
+[sub_resource type="Curve" id="Curve_wotmn"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[resource]
+script = ExtResource("1_jul2k")
+scale = 10.0
+segments = 3
+spacing = 2.0
+taper = SubResource("Curve_wotmn")
+color = Color(1, 1, 1, 1)
+use_outline = true
+outline_color = Color(0, 0, 0, 1)

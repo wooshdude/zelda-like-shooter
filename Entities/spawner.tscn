@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://cp62yrsnbpyf8"]
+
+[ext_resource type="Script" path="res://Entities/spawner.gd" id="1_0axav"]
+
+[node name="Spawner" type="Marker2D"]
+script = ExtResource("1_0axav")
+enemy = "res://Enemies/hag.tscn"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+spawn_path = NodePath("..")

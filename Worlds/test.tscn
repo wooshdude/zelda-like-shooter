@@ -1,8 +1,21 @@
-[gd_scene load_steps=6 format=3 uid="uid://c4a41hokbr0xh"]
+[gd_scene load_steps=10 format=3 uid="uid://c4a41hokbr0xh"]
 
 [ext_resource type="Texture2D" uid="uid://ck6pc4kijn686" path="res://Assets/tilemap_packed.png" id="1_0ngco"]
 [ext_resource type="PackedScene" uid="uid://ccah3j128wsvl" path="res://Player/player.tscn" id="1_dexho"]
 [ext_resource type="Script" path="res://Network/NetworkManager.gd" id="3_tusbe"]
+[ext_resource type="PackedScene" uid="uid://cp62yrsnbpyf8" path="res://Entities/spawner.tscn" id="4_r3df4"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_qddgt"]
+vertices = PackedVector2Array(267, 187, 389, 278, -183, 278, 135, 187, 391, -86, 266, -10, -184, -86, 215, -11, 42, 187, 42, 170, 133, 170, -73, 186, -73, 69, 214, 70)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 1, 0, 5), PackedInt32Array(6, 4, 5, 7), PackedInt32Array(8, 9, 10, 3), PackedInt32Array(8, 3, 2), PackedInt32Array(11, 8, 2), PackedInt32Array(11, 2, 6, 12), PackedInt32Array(12, 6, 7, 13)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-194, -96, 401, -96, 399, 288, -193, 288), PackedVector2Array(-63, 79, -63, 176, 32, 177, 32, 160, 142, 160, 144, 177, 257, 177, 256, 0, 225, -1, 224, 81)])
+source_geometry_group_name = &"navigation_polygon_source_group"
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_rhoqx"]
+source_geometry_group_name = &"navigation_polygon_source_group"
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_ya2gn"]
+source_geometry_group_name = &"navigation_polygon_source_group"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p2n0t"]
 texture = ExtResource("1_0ngco")
@@ -293,6 +306,7 @@ texture = ExtResource("1_0ngco")
 6:3/0/terrains_peering_bit/top_left_corner = 2
 6:3/0/terrains_peering_bit/top_side = 2
 6:3/0/terrains_peering_bit/top_right_corner = 2
+6:3/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_ya2gn")
 7:3/0 = 0
 7:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 7:3/0/physics_layer_0/angular_velocity = 0.0
@@ -321,6 +335,7 @@ texture = ExtResource("1_0ngco")
 0:4/0/terrains_peering_bit/top_left_corner = 2
 0:4/0/terrains_peering_bit/top_side = 2
 0:4/0/terrains_peering_bit/top_right_corner = 2
+0:4/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_rhoqx")
 1:4/0 = 0
 1:4/0/terrain_set = 0
 1:4/0/terrain = 2
@@ -335,6 +350,7 @@ texture = ExtResource("1_0ngco")
 1:4/0/terrains_peering_bit/top_left_corner = 2
 1:4/0/terrains_peering_bit/top_side = 2
 1:4/0/terrains_peering_bit/top_right_corner = 2
+1:4/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_rhoqx")
 2:4/0 = 0
 2:4/0/terrain_set = 0
 2:4/0/terrain = 2
@@ -345,6 +361,7 @@ texture = ExtResource("1_0ngco")
 2:4/0/terrains_peering_bit/bottom_side = 2
 2:4/0/terrains_peering_bit/bottom_left_corner = 2
 2:4/0/terrains_peering_bit/left_side = 2
+2:4/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_rhoqx")
 3:4/0 = 0
 3:4/0/terrain_set = 0
 3:4/0/terrain = 2
@@ -355,6 +372,7 @@ texture = ExtResource("1_0ngco")
 3:4/0/terrains_peering_bit/bottom_side = 2
 3:4/0/terrains_peering_bit/bottom_left_corner = 2
 3:4/0/terrains_peering_bit/left_side = 2
+3:4/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_rhoqx")
 4:4/0 = 0
 4:4/0/terrain_set = 0
 4:4/0/terrain = 2
@@ -363,6 +381,7 @@ texture = ExtResource("1_0ngco")
 4:4/0/terrains_peering_bit/bottom_side = 2
 4:4/0/terrains_peering_bit/bottom_left_corner = 2
 4:4/0/terrains_peering_bit/left_side = 2
+4:4/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_rhoqx")
 5:4/0 = 0
 5:4/0/terrain_set = 0
 5:4/0/terrain = 2
@@ -375,6 +394,7 @@ texture = ExtResource("1_0ngco")
 5:4/0/terrains_peering_bit/left_side = 2
 5:4/0/terrains_peering_bit/top_side = 2
 5:4/0/terrains_peering_bit/top_right_corner = 2
+5:4/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_rhoqx")
 6:4/0 = 0
 6:4/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 6:4/0/physics_layer_0/angular_velocity = 0.0
@@ -631,9 +651,13 @@ terrain_set_0/terrain_1/name = "Terrain 1"
 terrain_set_0/terrain_1/color = Color(0.5, 0.4375, 0.25, 1)
 terrain_set_0/terrain_2/name = "Terrain 2"
 terrain_set_0/terrain_2/color = Color(0.46875, 0.5, 0.25, 1)
+navigation_layer_0/layers = 1
 sources/0 = SubResource("TileSetAtlasSource_p2n0t")
 
 [node name="Test" type="Node2D"]
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_qddgt")
 
 [node name="TileMap" type="TileMap" parent="."]
 z_index = -1
@@ -666,3 +690,6 @@ offset_top = 32.0
 offset_right = 37.0
 offset_bottom = 63.0
 text = "join"
+
+[node name="Spawner" parent="." instance=ExtResource("4_r3df4")]
+position = Vector2(128, 0)

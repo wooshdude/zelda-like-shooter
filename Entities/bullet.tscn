@@ -1,20 +1,26 @@
 [gd_scene load_steps=4 format=3 uid="uid://bspx508570psu"]
 
-[ext_resource type="Script" path="res://Components/TrailEffect.gd" id="1_2kti6"]
 [ext_resource type="Script" path="res://Entities/bullet.gd" id="1_kqdhn"]
+[ext_resource type="Script" path="res://Effects/TrailEffect.gd" id="2_jj6q0"]
 
-[sub_resource type="Curve" id="Curve_njq1r"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
+[sub_resource type="SeparationRayShape2D" id="SeparationRayShape2D_qtecu"]
+length = 16.0
 
-[node name="Bullet" type="Area2D"]
+[node name="Bullet" type="Area2D" node_paths=PackedStringArray("trail")]
+collision_layer = 0
+collision_mask = 5
 script = ExtResource("1_kqdhn")
 speed = 8.0
+trail = NodePath("TrailEffect")
 
 [node name="TrailEffect" type="Node" parent="." node_paths=PackedStringArray("entity")]
-script = ExtResource("1_2kti6")
+script = ExtResource("2_jj6q0")
 entity = NodePath("..")
-scale = 8.0
-segments = 3
-spacing = 2.0
-taper = SubResource("Curve_njq1r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-16, 0)
+rotation = -1.5708
+shape = SubResource("SeparationRayShape2D_qtecu")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

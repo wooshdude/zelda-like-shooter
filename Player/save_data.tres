@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="SaveData" load_steps=4 format=3 uid="uid://gyjmkl3kv1rq"]
+
+[ext_resource type="Script" path="res://Player/save_data.gd" id="1_08tip"]
+[ext_resource type="Resource" uid="uid://bqt3cgsdxxj1i" path="res://Weapons/ruby_staff.tres" id="2_famth"]
+[ext_resource type="Resource" uid="uid://cik4b30uugmcy" path="res://Weapons/safire_staff.tres" id="3_yhfwf"]
+
+[resource]
+script = ExtResource("1_08tip")
+weapons = Array[Resource("res://Weapons/weapon.gd")]([ExtResource("3_yhfwf"), ExtResource("2_famth")])
+armor = []

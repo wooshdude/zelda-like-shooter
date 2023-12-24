@@ -1,11 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://ccah3j128wsvl"]
+[gd_scene load_steps=8 format=3 uid="uid://ccah3j128wsvl"]
 
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_i4eca"]
 [ext_resource type="Texture2D" uid="uid://33cbgvk08xkw" path="res://Assets/Tiles/tile_0084.png" id="2_2ir5h"]
 [ext_resource type="Script" path="res://Player/Weapon.gd" id="3_jrrdw"]
 [ext_resource type="Resource" uid="uid://gyjmkl3kv1rq" path="res://Player/save_data.tres" id="4_e73wo"]
 [ext_resource type="Texture2D" uid="uid://byr6kxawcg6je" path="res://Assets/Tiles/tile_0129.png" id="4_vnrkx"]
-[ext_resource type="Script" path="res://Player/Control.gd" id="6_3tmru"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tc8j7"]
 size = Vector2(10, 9)
@@ -21,7 +20,7 @@ properties/2/path = NodePath("Weapon/Sprite2D:flip_v")
 properties/2/spawn = true
 properties/2/replication_mode = 1
 
-[node name="Player" type="CharacterBody2D" groups=["Player"]]
+[node name="Player" type="CharacterBody2D"]
 motion_mode = 1
 script = ExtResource("1_i4eca")
 speed = 100.0
@@ -52,30 +51,5 @@ region_rect = Rect2(144, 160, 16, 16)
 [node name="Muzzle" type="Node2D" parent="Weapon"]
 position = Vector2(8, 0)
 
-[node name="RPMTimer" type="Timer" parent="Weapon"]
-one_shot = true
-
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_2lel2")
-
-[node name="UI" type="CanvasLayer" parent="."]
-
-[node name="Control" type="Control" parent="UI"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("6_3tmru")
-
-[node name="Hotbar" type="VBoxContainer" parent="UI/Control"]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 8.0
-offset_top = -48.0
-offset_right = 48.0
-offset_bottom = -8.0
-grow_vertical = 0

@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://csp4rn6xptn46"]
+
+[ext_resource type="Texture2D" uid="uid://3ecj1kqqao1g" path="res://Assets/Tiles/tile_0108.png" id="1_lvr6y"]
+[ext_resource type="Script" path="res://Components/StatesMachine.gd" id="2_ydph6"]
+[ext_resource type="Script" path="res://Enemies/EnemyFollow.gd" id="3_k25ws"]
+
+[node name="Hag" type="CharacterBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_lvr6y")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_ydph6")
+initial_state = NodePath("EnemyFollow")
+
+[node name="EnemyFollow" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy")]
+script = ExtResource("3_k25ws")
+enemy = NodePath("../..")
+move_speed = 8
